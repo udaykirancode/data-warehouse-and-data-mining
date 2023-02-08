@@ -1,13 +1,11 @@
-# Equal-Frequency (Equi-Depth) Partitioning
-sales_prices <- c(5, 10, 11, 13, 15, 35, 50, 55, 72, 92, 204, 215)
-bin_count <- 3
-bin_size <- length(sales_prices) %/% bin_count
-bin_indices <- c(1, bin_size, bin_size*2, length(sales_prices))
-equi_depth_bins <- cut(sales_prices, breaks = c(0, sales_prices[bin_indices], Inf), labels = paste0("Bin", 1:bin_count), include.lowest = TRUE)
-equi_depth_bins
-
-# Equal-Width Partitioning
-bin_width <- (max(sales_prices) - min(sales_prices)) %/% bin_count
-bin_limits <- seq(min(sales_prices), max(sales_prices), by = bin_width)
-equal_width_bins <- cut(sales_prices, breaks = c(bin_limits, Inf), labels = paste0("Bin", 1:bin_count), include.lowest = TRUE)
-equal_width_bins
+data <- c(5, 10, 11, 13, 15, 35, 50, 55, 72, 92, 204, 215)
+bin_size <- 4
+n_bins <- (length(data) %/% bin_size)
+binned_data_equi_depth <- cut(data, breaks = quantile(data, probs = seq(0, 1, length.out = n_bins + 1)), include.lowest = TRUE)
+data_range <- range(data)
+bin_width <- (data_range[2] - data_range[1]) %/% n_bins
+binned_data_equi_width <- cut(data, breaks = seq(data_range[1], data_range[2] + bin_width, by = bin_width), include.lowest = TRUE)
+cat("Equal-frequency (equi-depth) partitioning:\n")
+print(binned_data_equi_depth)
+cat("\nEqual-width partitioning:\n")
+print(binned_data_equi_width)
