@@ -1,0 +1,5 @@
+Choose a set of attributes for clustering and for giving a motivation.
+Choose the dataset and import the dataset into Weka tool.
+Discretize the attributes from all data types to nominal to perform the algorithm.
+Associate the attributes with the FP growth algorithm.
+Set the Upper bound min_sup and lower bound min_sup values.
